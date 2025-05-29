@@ -24,3 +24,25 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+
+  ordersystem:
+    build: .
+    container_name: ordersystem
+    restart: always
+    ports:
+      - 8080:8080
+      - 8081:8081
+      - 50051:50051
+    depends_on:
+      - mysql
+      - rabbitmq
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASS: root
+      MYSQL_DB: orders
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASS: guest

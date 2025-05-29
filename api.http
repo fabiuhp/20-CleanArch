@@ -1,0 +1,35 @@
+# Create Order
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "id": "1",
+  "price": 100.0,
+  "tax": 10.0
+}
+
+###
+
+# List Orders (REST)
+GET http://localhost:8080/orders?page=1&per_page=10
+
+###
+
+# List Orders (gRPC)
+POST http://localhost:50051
+Content-Type: application/grpc
+
+{
+  "page": 1,
+  "per_page": 10
+}
+
+###
+
+# List Orders (GraphQL)
+POST http://localhost:8081/graphql
+Content-Type: application/json
+
+{
+  "query": "query { orders(page: 1, perPage: 10) { id, price, tax, finalPrice } }"
+}
