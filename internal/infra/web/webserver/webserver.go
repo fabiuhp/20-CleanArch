@@ -33,5 +33,6 @@ func (s *WebServer) Start() {
 	for path, handler := range s.Handlers {
 		s.Router.Handle(path, handler)
 	}
-	http.ListenAndServe(s.WebServerPort, s.Router)
+	// Adicionando o prefixo ":" antes da porta
+	http.ListenAndServe(":"+s.WebServerPort, s.Router)
 }

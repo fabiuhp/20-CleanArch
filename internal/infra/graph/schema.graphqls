@@ -12,7 +12,7 @@ input OrderInput {
 }
 
 type Query {
-    orders(page: Int = 1, perPage: Int = 10): [Order!]! @paginate
+    orders(page: Int = 1, perPage: Int = 10): [Order!]!
 }
 
 type Mutation {

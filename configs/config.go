@@ -15,19 +15,58 @@ type conf struct {
 }
 
 func LoadConfig(path string) (*conf, error) {
-	var cfg *conf
+	// Inicializar a estrutura de configuração
+	cfg := &conf{
+		// Valores padrão
+		DBDriver:          "mysql",
+		DBHost:            "mysql",
+		DBPort:            "3306",
+		DBUser:            "root",
+		DBPassword:        "root",
+		DBName:            "orders",
+		WebServerPort:     "8080",
+		GRPCServerPort:    "50051",
+		GraphQLServerPort: "8081",
+	}
+
+	// Configurar o viper para ler variáveis de ambiente
 	viper.SetConfigName("app_config")
 	viper.SetConfigType("env")
 	viper.AddConfigPath(path)
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(err)
+
+	// Tenta ler o arquivo .env, mas não falha se ele não existir
+	_ = viper.ReadInConfig()
+
+	// Sobrescrever os valores padrão com as variáveis de ambiente
+	if envDBDriver := viper.GetString("DB_DRIVER"); envDBDriver != "" {
+		cfg.DBDriver = envDBDriver
 	}
-	err = viper.Unmarshal(&cfg)
-	if err != nil {
-		panic(err)
+	if envDBHost := viper.GetString("DB_HOST"); envDBHost != "" {
+		cfg.DBHost = envDBHost
 	}
-	return cfg, err
+	if envDBPort := viper.GetString("DB_PORT"); envDBPort != "" {
+		cfg.DBPort = envDBPort
+	}
+	if envDBUser := viper.GetString("DB_USER"); envDBUser != "" {
+		cfg.DBUser = envDBUser
+	}
+	if envDBPassword := viper.GetString("DB_PASSWORD"); envDBPassword != "" {
+		cfg.DBPassword = envDBPassword
+	}
+	if envDBName := viper.GetString("DB_NAME"); envDBName != "" {
+		cfg.DBName = envDBName
+	}
+	if envWebServerPort := viper.GetString("WEB_SERVER_PORT"); envWebServerPort != "" {
+		cfg.WebServerPort = envWebServerPort
+	}
+	if envGRPCServerPort := viper.GetString("GRPC_SERVER_PORT"); envGRPCServerPort != "" {
+		cfg.GRPCServerPort = envGRPCServerPort
+	}
+	if envGraphQLServerPort := viper.GetString("GRAPHQL_SERVER_PORT"); envGraphQLServerPort != "" {
+		cfg.GraphQLServerPort = envGraphQLServerPort
+	}
+
+	return cfg, nil
 }

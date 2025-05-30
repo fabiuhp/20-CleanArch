@@ -15,8 +15,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-// Requires gRPC-Go v1.64.0 or later.
-const _ = grpc.SupportPackageIsVersion9
+const _ = grpc.SupportPackageIsVersion7
 
 const (
 	OrderService_CreateOrder_FullMethodName = "/pb.OrderService/CreateOrder"
@@ -40,9 +39,8 @@ func NewOrderServiceClient(cc grpc.ClientConnInterface) OrderServiceClient {
 }
 
 func (c *orderServiceClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CreateOrderResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateOrderResponse)
-	err := c.cc.Invoke(ctx, OrderService_CreateOrder_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, OrderService_CreateOrder_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,9 +48,8 @@ func (c *orderServiceClient) CreateOrder(ctx context.Context, in *CreateOrderReq
 }
 
 func (c *orderServiceClient) ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOrdersResponse)
-	err := c.cc.Invoke(ctx, OrderService_ListOrders_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, OrderService_ListOrders_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
