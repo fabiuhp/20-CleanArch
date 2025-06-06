@@ -90,7 +90,7 @@ func main() {
 	go grpcServer.Serve(lis)
 
 	// Configurando o servidor GraphQL
-	graphqlServer := graphql_handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{
+	graphqlServer := graphql_handler.New(graph.NewExecutableSchema(graph.Config{
 		Resolvers: graph.NewResolver(*createOrderUseCase, listOrdersUseCase),
 	}))
 

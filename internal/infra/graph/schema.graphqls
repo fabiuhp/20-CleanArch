@@ -1,20 +1,20 @@
 type Order {
-    id: String!
-    Price: Float!
-    Tax: Float!
-    FinalPrice: Float!
-}
-
-input OrderInput {
-    id : String!
-    Price: Float!
-    Tax: Float!
+  id: ID!
+  price: Float!
+  tax: Float!
+  finalPrice: Float!
 }
 
 type Query {
-    orders(page: Int = 1, perPage: Int = 10): [Order!]!
+  orders(page: Int, perPage: Int): [Order!]!
+  order(id: ID!): Order
 }
 
 type Mutation {
-    createOrder(input: OrderInput): Order
+  createOrder(input: CreateOrderInput!): Order!
 }
+
+input CreateOrderInput {
+  price: Float!
+  tax: Float!
+} 

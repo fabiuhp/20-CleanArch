@@ -2,15 +2,20 @@
 
 package model
 
-type Order struct {
-	ID         string  `json:"id"`
-	Price      float64 `json:"Price"`
-	Tax        float64 `json:"Tax"`
-	FinalPrice float64 `json:"FinalPrice"`
+type CreateOrderInput struct {
+	Price float64 `json:"price"`
+	Tax   float64 `json:"tax"`
 }
 
-type OrderInput struct {
-	ID    string  `json:"id"`
-	Price float64 `json:"Price"`
-	Tax   float64 `json:"Tax"`
+type Mutation struct {
+}
+
+type Order struct {
+	ID         string  `json:"id"`
+	Price      float64 `json:"price"`
+	Tax        float64 `json:"tax"`
+	FinalPrice float64 `json:"finalPrice"`
+}
+
+type Query struct {
 }
